@@ -1,145 +1,68 @@
-const {
-    AlignmentType,
-    convertMillimetersToTwip,
-    Document,
-    HeadingLevel,
-    Packer,
-    Paragraph,
-    TextRun,
-    Footer,
-    PageNumber,
-    SectionType
-} = require("docx");
-
-const mammoth = require("mammoth");
-
 const fs = require("fs");
-const path = require("path");
-const cheerio = require('cheerio');
-const { settings, pageSettings } = require("./settings.js");
-const { addFrontMatter } = require("./src/front-matter.js"); 
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
 
-async function main() {
-    const cheminFichier = path.resolve("./source.docx");
-    if (!fs.existsSync(cheminFichier)) {
-        throw new Error(`Le fichier n'existe pas : ${cheminFichier}`);
-    }
+const { compose } = require("./src/compose.js");
+const { MarginSettings, PageNumbersSettings, pageSettings } = require("./src/page-settings.js");
+const { Settings } = require("./src/settings.js");
 
-    // Lire le fichier en tant que buffer
-    const data = fs.readFileSync(cheminFichier);
-    const source = await mammoth.convertToHtml({ buffer: data });
+// Entry point
 
-    const $ = cheerio.load(`<div>${source.value}</div>`);
-    const elements = [];
-    $('div').children().each((index, element) => {
-        const $el = $(element);
-        elements.push({
-            tag: element.tagName.toLowerCase(),
-            text: $el.text().trim()
-        });
-    });
+const argv = yargs(hideBin(process.argv))
+    .option('settings', {
+        alias: 's',
+        type: 'string',
+        description: 'Fichier de configuration',
+        requiresArg: true,
+    })
+    .demandOption('settings', 'Le chemin du fichier de configuration est requis.')
+    .help()
+    .argv;
 
-    var section = {};
-    var sections = [];
+if (!fs.existsSync(argv.settings)) {
+    console.error(`Le fichier de configuration n'existe pas : ${argv.settings}`);
+    process.exit(1);
+}
 
-    addFrontMatter(sections, settings);
+/**
+ * @type {Settings} settings
+ */
 
-    var startNumbering = true;
+const { settings } = require(argv.settings);
 
-    elements.forEach((element) => {
-        if (element.tag === 'h1') {
-            const newSection = {
-                properties: {
-                    type: SectionType.ODD_PAGE,
-                    page: {
-                        ...pageSettings, 
-                        ...(startNumbering && { pageNumbers: { start: 1, }, })
-                    },
-                },
-                footers: {
-                    default: new Footer({
-                        children: [
-                            new Paragraph({
-                                children: [
-                                    new TextRun({
-                                        children: [PageNumber.CURRENT],
-                                    }),
-                                ],
-                                alignment: AlignmentType.CENTER,
-                            }),
-                        ],
-                    })
-                },
-                children: [
-                    new Paragraph({
-                        children: [
-                            new TextRun(element.text),
-                        ],
-                        heading: HeadingLevel.HEADING_1,
-                    }),
-                ]
-            };
-            const index = sections.push(newSection);
-            section = sections[index - 1];
-            startNumbering = false; // Disable numbering after the first section
-        } else if (element.tag === 'p') {
-            section.children.push(new Paragraph({
-                children: [
-                    new TextRun(element.text),
-                ],
-                style: "corp",
-            }));
-        }
-    });
+// Sanity checks
+if (!settings.source || !fs.existsSync(settings.source)) {
+    console.error(`Le fichier source n'existe pas : ${settings.source}`);
+    process.exit(1);
+}
 
-    const doc = new Document({
-        mirrorMargins: settings.mirrorMargins ?? false,
-        styles: {
-            default: {
-                heading1: {
-                    run: {
-                        font: "Arial",
-                        size: (settings.fontSize * 1.5) * 2, // in half-points
-                        bold: true,
-                    },
-                    paragraph: {
-                        spacing: {
-                            after: convertMillimetersToTwip(20),
-                        },
-                    },
-                },
-            },
-            paragraphStyles: [
-                {
-                    id: "corp",
-                    name: "Corp",
-                    basedOn: "Normal",
-                    next: "Corp",
-                    run: {
-                        font: settings.fontName,
-                        size: settings.fontSize * 2, // in half-points
-                    },
-                    paragraph: {
-                        spacing: {
-                            line: (settings.fontSize + 4) * 20, // in twips (1 twip = 1/20 of a point),
-                            after: 0, // in twips
-                            before: 0, // in twips
-                        },
-                        indent: {
-                            firstLine: convertMillimetersToTwip(10),
-                            left: 0,
-                            right: 0,
-                        },
-                        alignment: AlignmentType.JUSTIFIED,
-                    },
-                },
-            ],
-        },
-        sections: sections
-    });
+if (!settings.output) {
+    console.error("Le chemin de sortie n'est pas défini dans les paramètres.");
+    process.exit(1);
+}
 
-    const buffer = await Packer.toBuffer(doc);
-    fs.writeFileSync("output.docx", buffer);
+if (!settings.authors || settings.authors.length === 0) {
+    console.error("La liste des auteurs est vide dans les paramètres.");
+    process.exit(1);
+}
+
+if (!settings.title) {
+    console.error("Le titre n'est pas défini dans les paramètres.");
+    process.exit(1);
 }
 
 main();
+
+async function main() {
+    // Paperback 
+    await compose(settings, pageSettings.HALF_LETTER, MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, settings.output.replace('.docx', '-paperback.docx'));
+
+    // Regular half-letter (for PDF export)
+    await compose(settings, pageSettings.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, settings.output.replace('.docx', '-half-letter.docx'));
+
+    // Regular A4 (for PDF export)
+    await compose(settings, pageSettings.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, settings.output.replace('.docx', '-a4.docx'));
+
+    // A4 (for epub export)
+    await compose(settings, pageSettings.A4, MarginSettings.NORMAL, PageNumbersSettings.NONE, settings.output.replace('.docx', '-epub.docx'));
+}
