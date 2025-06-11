@@ -6,9 +6,9 @@
     "scripts": {
         "start": "tsx index.ts"
     },
-    "author": "",
-    "license": "ISC",
-    "description": "",
+    "author": "Yannick Mauray",
+    "license": "GPL-3.0-only",
+    "description": "A tool to compose multiple formats for a book, from a single source file.",
     "dependencies": {
         "cheerio": "^1.0.0",
         "docx": "https://github.com/ymauray/docx/releases/download/v9.5.0-mm/docx-9.5.0-mm.tgz",
