@@ -5,3 +5,6 @@ epubcheck-5.2.1/
 .DS_Store
 *zip
 temp/
+sources/
+output/
+*epub

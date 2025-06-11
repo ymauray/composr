@@ -1,19 +1,26 @@
 {
-  "name": "imposr",
-  "type": "commonjs",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "main": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "cheerio": "^1.0.0",
-    "docx": "https://github.com/ymauray/docx/releases/download/v9.5.0-mm/docx-9.5.0-mm.tgz",
-    "mammoth": "^1.9.1",
-    "yargs": "^18.0.0"
-  }
+    "name": "imposr",
+    "type": "module",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "scripts": {
+        "start": "tsx index.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "cheerio": "^1.0.0",
+        "docx": "https://github.com/ymauray/docx/releases/download/v9.5.0-mm/docx-9.5.0-mm.tgz",
+        "epub-gen": "^0.1.0",
+        "imposr": "file:",
+        "mammoth": "^1.9.1",
+        "yargs": "^18.0.0"
+    },
+    "devDependencies": {
+        "@types/ejs": "^3.1.5",
+        "@types/epub-gen": "^0.1.2",
+        "@types/yargs": "^17.0.33",
+        "tsx": "^4.20.0"
+    }
 }
