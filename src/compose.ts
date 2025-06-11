@@ -123,7 +123,7 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
             internalSections[internalSections.length - 1].children.push(el);
         }
     }
-    
+
     const sections: ISectionOptions[] = await addFrontMatter(settings, pageSettings, marginSettings);
 
     var startNumbering = true;
@@ -151,6 +151,9 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
                                     }),
                                 ],
                                 alignment: AlignmentType.CENTER,
+                                indent: {
+                                    firstLine: 0,
+                                }
                             }),
                         ],
                     })
