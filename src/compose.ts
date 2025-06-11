@@ -4,6 +4,12 @@ import { PageSettings, TagElement } from "./types";
 import { MarginSettings, PageNumbersSettings } from "./page-settings";
 import fs from "fs";
 
+const legalNotice = [
+    "Ce texte est une fiction. Les noms et les événements qui y sont décrits sont issus de l’imagination de l’auteur, et toute ressemblance avec des personnages, des personnes, ou des situations existantes ou ayant existé ne pourrait être que pure coïncidence.",
+    "Les erreurs qui peuvent subsister sont le fait de l’auteur.",
+    "Le piratage prive l’auteur ainsi que les personnes ayant travaillé sur ce livre de leurs droits.",
+];
+
 async function titlePage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions> {
 
     const authors: ParagraphChild[] = [];
@@ -79,38 +85,17 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
                 ...((marginSettings == MarginSettings.NORMAL) && { margin: { ...pageSettings.margin, gutter: 0 } }),
             },
         },
-        children: [
+        children: legalNotice.map((line) =>
             new Paragraph({
                 children: [
                     new TextRun({
-                        text: "Ce texte est une fiction. Les noms et les événements qui y sont décrits sont issus de l’imagination de l’auteur, et toute ressemblance avec des personnages, des personnes, ou des situations existantes ou ayant existé ne pourrait être que pure coïncidence.",
+                        text: line,
                     }),
                 ],
                 spacing: {
                     after: pageSettings.fontSize * 20, // in twips
                 }
-            }),
-            new Paragraph({
-                children: [
-                    new TextRun({
-                        text: "Les erreurs qui peuvent subsister sont le fait de l’auteur.",
-                    }),
-                ],
-                spacing: {
-                    after: pageSettings.fontSize * 20, // in twips
-                }
-            }),
-            new Paragraph({
-                children: [
-                    new TextRun({
-                        text: "Le piratage prive l’auteur ainsi que les personnes ayant travaillé sur ce livre de leurs droits.",
-                    }),
-                ],
-                spacing: {
-                    after: pageSettings.fontSize * 20, // in twips
-                }
-            }),
-        ]
+            }))
     };
 
     return newSection;
