@@ -91,6 +91,7 @@ export async function buildEpub(source: TagElement[], settings: Settings, pageSe
         customOpfTemplatePath: 'assets/content.opf.ejs',
         css: fs.readFileSync('assets/style.css', 'utf8'),
         appendChapterTitles: false,
+        tempDir: './temp',
         content
     } as Options;
 
