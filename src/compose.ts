@@ -1,4 +1,4 @@
-import { AlignmentType, convertMillimetersToTwip, Document, Footer, HeadingLevel, ISectionOptions, Packer, PageNumber, Paragraph, ParagraphChild, SectionType, TextRun } from "docx";
+import { AlignmentType, convertInchesToTwip, convertMillimetersToTwip, Document, Footer, HeadingLevel, ImageRun, ISectionOptions, Packer, PageNumber, Paragraph, ParagraphChild, SectionType, TextRun } from "docx";
 import { Settings } from "./settings";
 import { PageSettings, TagElement } from "./types";
 import { MarginSettings, PageNumbersSettings } from "./page-settings";
@@ -124,7 +124,39 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
         }
     }
 
-    const sections: ISectionOptions[] = await addFrontMatter(settings, pageSettings, marginSettings);
+    const sections: ISectionOptions[] = [{
+        properties: {
+            page: {
+                ...pageSettings,
+                ...{ margin: { ...pageSettings.margin, gutter: 0 } }
+            },
+        },
+        children: [
+            new Paragraph({
+                children: [
+                    new ImageRun({
+                        type: "png",
+                        data: fs.readFileSync(settings.cover),
+                        transformation: {
+                            width: (pageSettings.size.width / convertInchesToTwip(100) * 100) * 96,
+                            height: (pageSettings.size.height / convertInchesToTwip(100) * 100) * 96,
+                        },
+                        floating: {
+                            horizontalPosition: {
+                                align: "center",
+                            },
+                            verticalPosition: {
+                                align: "top",
+                            },
+                        },
+                    })
+                ],
+                alignment: AlignmentType.CENTER,
+            }),
+        ]
+    }];
+
+    sections.push(...await addFrontMatter(settings, pageSettings, marginSettings));
 
     var startNumbering = true;
 
