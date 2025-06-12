@@ -5,3 +5,12 @@ p {
 ul li a {
     line-height: 1.5em;
 }
+
+.authors {
+    text-align: center;
+}
+
+.author {
+    font-size: 1.4em;
+}
+
