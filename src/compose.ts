@@ -20,9 +20,11 @@ import { MarginSettings, PageNumbersSettings } from "./page-settings";
 import fs from "fs";
 
 const legalNotice = [
-    "Ce texte est une fiction. Les noms et les événements qui y sont décrits sont issus de l’imagination de l’auteur, et toute ressemblance avec des personnages, des personnes, ou des situations existantes ou ayant existé ne pourrait être que pure coïncidence.",
-    "Les erreurs qui peuvent subsister sont le fait de l’auteur.",
-    "Le piratage prive l’auteur ainsi que les personnes ayant travaillé sur ce livre de leurs droits.",
+    "Ce livre est une œuvre de fiction. Toute ressemblance avec des personnes existantes ou ayant existé, des événements ou des lieux réels ne saurait être que fortuite.",
+    "Les personnages, situations et dialogues sont issus de l’imagination de l’auteur.",
+    "La copie ou le piratage de ce livre porte préjudice à l’auteur et à l’ensemble des personnes ayant contribué à sa réalisation. Merci de respecter leur travail.",
+    "Toute reproduction ou diffusion, même partielle, sans autorisation, est interdite.",
+    "L’auteur a apporté le plus grand soin à la correction du texte, mais des erreurs peuvent subsister. Toute remarque constructive est la bienvenue.",
 ];
 
 async function titlePage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions> {
