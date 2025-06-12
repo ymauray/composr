@@ -17,6 +17,7 @@ import { Settings } from './src/settings';
 
 export const settings: Settings = {
     source: 'sources/mybook/My Book.docx',
+    cover: 'sources/mybook/cover.jpg',
     output: 'output.docx',
     authors: ["Alice Smith", "Bob Johnson", "Charlie Brown"],
     title: "My Book Title",
