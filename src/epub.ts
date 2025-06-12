@@ -11,7 +11,7 @@ type Content = { title?: string; author?: string; data: string, excludeFromToc?:
 
 async function titlePage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<string> {
 
-    var titlePageContent = "";
+    var titlePageContent = "<div class='authors'>\n";
 
     // Add authors
     settings.authors.forEach((author, index) => {
@@ -30,7 +30,7 @@ async function titlePage(settings: Settings, pageSettings: PageSettings, marginS
         titlePageContent += authorText;
     });
 
-    titlePageContent += `<div class='title'>${settings.title}</div>\n`;
+    titlePageContent += `</div>\n<div class='title'>${settings.title}</div>\n`;
 
     return titlePageContent;
 }
