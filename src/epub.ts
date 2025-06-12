@@ -76,7 +76,7 @@ export async function buildEpub(source: TagElement[], settings: Settings, pageSe
     content.push(...internalSections.map(internalSection => {
         return {
             title: internalSection.title.text,
-            data: internalSection.children.map(child => `<p>${child.text}</p>`).join('\n'),
+            data: `<h1>${internalSection.title.text}</h1>\n${internalSection.children.map(child => `<p>${child.text}</p>`).join('\n')}`
         };
     }));
 
@@ -89,6 +89,7 @@ export async function buildEpub(source: TagElement[], settings: Settings, pageSe
         customNcxTocTemplatePath: 'assets/toc.ncx.ejs',
         customHtmlTocTemplatePath: 'assets/toc.xhtml.ejs',
         css: fs.readFileSync('assets/style.css', 'utf8'),
+        appendChapterTitles: false,
         content
     } as Options;
 
