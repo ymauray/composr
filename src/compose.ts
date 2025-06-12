@@ -61,7 +61,7 @@ async function titlePage(settings: Settings, pageSettings: PageSettings, marginS
                     new TextRun({
                         text: settings.title,
                         bold: true,
-                        size: (pageSettings.fontSize * 2) * 2, // Author names are 1.4 times larger
+                        size: (pageSettings.fontSize * 2) * 2, // Title is 2 times larger
                     }),
                 ],
                 alignment: AlignmentType.CENTER,
