@@ -88,6 +88,7 @@ export async function buildEpub(source: TagElement[], settings: Settings, pageSe
         tocTitle: 'Table des matières',
         customNcxTocTemplatePath: 'assets/toc.ncx.ejs',
         customHtmlTocTemplatePath: 'assets/toc.xhtml.ejs',
+        customOpfTemplatePath: 'assets/content.opf.ejs',
         css: fs.readFileSync('assets/style.css', 'utf8'),
         appendChapterTitles: false,
         content
