@@ -59,7 +59,7 @@ async function titlePage(settings: Settings, pageSettings: PageSettings, marginS
 
     return {
         properties: {
-            type: SectionType.ODD_PAGE,
+            type: marginSettings == MarginSettings.OPPOSING_PAGES ? SectionType.ODD_PAGE : SectionType.NEXT_PAGE,
             page: {
                 ...pageSettings,
                 ...((marginSettings == MarginSettings.NORMAL) && { margin: { ...pageSettings.margin, gutter: 0 } }),
