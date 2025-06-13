@@ -13,7 +13,6 @@
         "cheerio": "^1.0.0",
         "docx": "https://github.com/ymauray/docx/releases/download/v9.5.0-mm/docx-9.5.0-mm.tgz",
         "epub-gen": "^0.1.0",
-        "imposr": "file:",
         "mammoth": "^1.9.1",
         "yargs": "^18.0.0"
     },
