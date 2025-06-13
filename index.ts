@@ -91,22 +91,20 @@ async function main() {
         process.exit(1);
     }
 
-    const isWindows = process.platform === 'win32';
-
     // Paperback 
     var outputPath = settings.output.replace('.docx', '-paperback.docx')
     await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, outputPath);
-    isWindows && argv.withPdf && await convertToPdf(outputPath);
+    argv.withPdf && await convertToPdf(outputPath);
 
     // Regular half-letter (for PDF export)
     outputPath = settings.output.replace('.docx', '-half-letter.docx');
     await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-    isWindows && argv.withPdf && await convertToPdf(outputPath);
+    argv.withPdf && await convertToPdf(outputPath);
 
     // Regular A4 (for PDF export)
     outputPath = settings.output.replace('.docx', '-a4.docx');
     const document = await compose(filteredSource, settings, pageType.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-    isWindows && argv.withPdf && await convertToPdf(outputPath);
+    argv.withPdf && await convertToPdf(outputPath);
 
     // Epub
     await buildEpub(filteredSource, settings, settings.output.replace('.docx', '.epub'));
