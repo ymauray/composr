@@ -21,6 +21,7 @@ import { readSourceFile } from './src/file-utils';
 import { MarginSettings, PageNumbersSettings, pageType } from './src/page-settings';
 import { compose } from './src/compose';
 import { buildEpub } from './src/epub';
+import { convertToPdf } from './src/pdf';
 
 async function main() {
     const argv = await yargs(hideBin(process.argv))
@@ -72,17 +73,24 @@ async function main() {
         process.exit(1);
     }
 
+    const isWindows = process.platform === 'win32';
+
     // Paperback 
-    await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, settings.output.replace('.docx', '-paperback.docx'));
+    var outputPath = settings.output.replace('.docx', '-paperback.docx')
+    await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, outputPath);
+    isWindows && await convertToPdf(outputPath);
 
     // Regular half-letter (for PDF export)
-    await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, settings.output.replace('.docx', '-half-letter.docx'));
+    outputPath = settings.output.replace('.docx', '-half-letter.docx');
+    await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
+    isWindows && await convertToPdf(outputPath);
 
     // Regular A4 (for PDF export)
-    const document = await compose(filteredSource, settings, pageType.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, settings.output.replace('.docx', '-a4.docx'));
+    outputPath = settings.output.replace('.docx', '-a4.docx');
+    const document = await compose(filteredSource, settings, pageType.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
+    isWindows && await convertToPdf(outputPath);
 
     await buildEpub(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.NONE, settings.output.replace('.docx', '.epub'));
-    //await makeEpub(document, settings.output.replace('.docx', '.epub'));
 }
 
 main();
