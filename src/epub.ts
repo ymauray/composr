@@ -95,9 +95,9 @@ export async function buildEpub(source: TagElement[], settings: Settings, output
     const options = {
         title: settings.title,
         author: settings.authors,
-        publisher: 'Amaury Bennett',
-        lang: 'fr',
-        tocTitle: 'Table des matières',
+        publisher: settings.publisher,
+        lang: settings.lang,
+        tocTitle: settings.tocTitle,
         customNcxTocTemplatePath: 'assets/toc.ncx.ejs',
         customHtmlTocTemplatePath: 'assets/toc.xhtml.ejs',
         customOpfTemplatePath: 'assets/content.opf.ejs',

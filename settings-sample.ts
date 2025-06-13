@@ -19,6 +19,9 @@ export const settings: Settings = {
     source: 'sources/mybook/My Book.docx',
     cover: 'sources/mybook/cover.jpg',
     output: 'output.docx',
-    authors: ["Alice Smith", "Bob Johnson", "Charlie Brown"],
     title: "My Book Title",
+    authors: ["Alice Smith", "Bob Johnson", "Charlie Brown"],
+    publisher: 'My Publisher Name',
+    lang: 'en',
+    tocTitle: 'Table of Contents'
 };
