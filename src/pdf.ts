@@ -14,6 +14,7 @@
 // avec ce programme. Si ce n'est pas le cas, voir <https://www.gnu.org/licenses/>.
 
 import { exec } from "child_process";
+import path from "path";
 
 export async function convertToPdf(inputPath: string): Promise<string> {
 
@@ -26,7 +27,7 @@ export async function convertToPdf(inputPath: string): Promise<string> {
     if (isWindows)
         return convertToPdfWindows(inputPath, outputPath);
     else
-        throw Promise.resolve(outputPath);
+        return convertToPdfMacOS(inputPath, outputPath);
 }
 
 async function convertToPdfWindows(inputPath: string, outputPath: string): Promise<string> {
@@ -38,7 +39,28 @@ async function convertToPdfWindows(inputPath: string, outputPath: string): Promi
     const command = `powershell -ExecutionPolicy Bypass -File "./docx2pdf.ps1" ${args.join(' ')}`;
 
     return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        exec(command, (error, _stdout, _stderr) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(outputPath);
+            }
+        });
+    });
+}
+
+async function convertToPdfMacOS(inputPath: string, outputPath: string): Promise<string> {
+    const args = [
+        path.resolve(inputPath),
+        path.resolve(outputPath),
+    ];
+
+    const command = `osascript docx2pdf.scpt ${args.join(' ')}`;
+
+    return new Promise((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        exec(command, (error, _stdout, _stderr) => {
             if (error) {
                 reject(error);
             } else {
