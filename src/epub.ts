@@ -1,4 +1,4 @@
-// Génération de fichiers EPUB à partir de la structure de livre imposr et des paramètres utilisateur.
+// Génération de fichiers EPUB à partir de la structure de livre composr et des paramètres utilisateur.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

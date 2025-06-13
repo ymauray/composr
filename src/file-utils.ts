@@ -1,4 +1,4 @@
-// Fonctions utilitaires pour la lecture et la conversion des fichiers source DOCX en éléments imposr.
+// Fonctions utilitaires pour la lecture et la conversion des fichiers source DOCX en éléments composr.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

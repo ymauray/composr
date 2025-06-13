@@ -1,4 +1,4 @@
-// Définition de la classe Settings pour la configuration principale du projet imposr.
+// Définition de la classe Settings pour la configuration principale du projet composr.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

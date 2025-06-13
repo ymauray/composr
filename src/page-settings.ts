@@ -1,4 +1,4 @@
-// Paramètres de page prédéfinis et constantes pour la mise en page des documents imposr.
+// Paramètres de page prédéfinis et constantes pour la mise en page des documents composr.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

@@ -1,4 +1,4 @@
-// Définitions des types et classes de base pour la structure des documents imposr.
+// Définitions des types et classes de base pour la structure des documents composr.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

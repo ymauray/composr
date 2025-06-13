@@ -1,4 +1,4 @@
-// Point d'entrée principal du programme imposr : lecture des paramètres, génération des documents et gestion du workflow.
+// Point d'entrée principal du programme composr : lecture des paramètres, génération des documents et gestion du workflow.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

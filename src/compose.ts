@@ -1,4 +1,4 @@
-// Génération des documents DOCX à partir de la structure imposr et des paramètres utilisateur.
+// Génération des documents DOCX à partir de la structure composr et des paramètres utilisateur.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier

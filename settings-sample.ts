@@ -1,4 +1,4 @@
-// Exemple de fichier de configuration Settings pour un projet imposr.
+// Exemple de fichier de configuration Settings pour un projet composr.
 // Copyright (C) 2025 Yannick Mauray
 //
 // Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier
