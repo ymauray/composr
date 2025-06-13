@@ -35,6 +35,11 @@ async function main() {
             description: 'Source à utiliser pour la génération, le fichier de configuration sera ./sources/<source>/settings.ts',
             requiresArg: true,
         })
+        .option('with-pdf', {
+            type: 'boolean',
+            description: 'Générer également un PDF à partir du document DOCX',
+            default: false,
+        })
         .help()
         .argv;
 
@@ -91,17 +96,17 @@ async function main() {
     // Paperback 
     var outputPath = settings.output.replace('.docx', '-paperback.docx')
     await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, outputPath);
-    isWindows && await convertToPdf(outputPath);
+    isWindows && argv.withPdf && await convertToPdf(outputPath);
 
     // Regular half-letter (for PDF export)
     outputPath = settings.output.replace('.docx', '-half-letter.docx');
     await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-    isWindows && await convertToPdf(outputPath);
+    isWindows && argv.withPdf && await convertToPdf(outputPath);
 
     // Regular A4 (for PDF export)
     outputPath = settings.output.replace('.docx', '-a4.docx');
     const document = await compose(filteredSource, settings, pageType.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-    isWindows && await convertToPdf(outputPath);
+    isWindows && argv.withPdf && await convertToPdf(outputPath);
 
     // Epub
     await buildEpub(filteredSource, settings, settings.output.replace('.docx', '.epub'));
