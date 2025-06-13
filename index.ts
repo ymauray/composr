@@ -90,8 +90,8 @@ async function main() {
     const document = await compose(filteredSource, settings, pageType.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
     isWindows && await convertToPdf(outputPath);
 
-    await buildEpub(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.NONE, settings.output.replace('.docx', '.epub'));
+    // Epub
+    await buildEpub(filteredSource, settings, settings.output.replace('.docx', '.epub'));
 }
 
 main();
-

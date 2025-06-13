@@ -24,7 +24,7 @@ import ejs from 'ejs';
 
 type Content = { title?: string; author?: string; data: string, excludeFromToc?: boolean, beforeToc?: boolean, filename?: string };
 
-async function titlePage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<string> {
+async function titlePage(settings: Settings): Promise<string> {
 
     var titlePageContent = "<div class='authors'>\n";
 
@@ -50,7 +50,7 @@ async function titlePage(settings: Settings, pageSettings: PageSettings, marginS
     return titlePageContent;
 }
 
-async function copyrightPage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<string> {
+async function copyrightPage(): Promise<string> {
 
     var copyrightPageContent = "";
 
@@ -63,16 +63,16 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
     return copyrightPageContent;
 }
 
-async function addFrontMatter(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<Content[]> {
+async function addFrontMatter(settings: Settings): Promise<Content[]> {
     const frontMatter: Content[] = [
-        { title: 'Frontispice', data: await titlePage(settings, pageSettings, marginSettings), beforeToc: true },
-        { title: 'Mentions légales', data: await copyrightPage(settings, pageSettings, marginSettings), beforeToc: true },
+        { title: 'Frontispice', data: await titlePage(settings), beforeToc: true },
+        { title: 'Mentions légales', data: await copyrightPage(), beforeToc: true },
     ];
 
     return frontMatter;
 }
 
-export async function buildEpub(source: TagElement[], settings: Settings, pageSettings: PageSettings, marginSettings: number, pageNumbersSettings: number, outputPath: string): Promise<void> {
+export async function buildEpub(source: TagElement[], settings: Settings, outputPath: string): Promise<void> {
 
     const internalSections = [] as { title: TagElement; children: TagElement[] }[];
     for (const el of source) {
@@ -86,7 +86,7 @@ export async function buildEpub(source: TagElement[], settings: Settings, pageSe
         }
     }
 
-    const content = await addFrontMatter(settings, pageSettings, marginSettings);
+    const content = await addFrontMatter(settings);
 
     content.push(...internalSections.map(internalSection => {
         return {
