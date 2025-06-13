@@ -1,66 +1,72 @@
-# imposr
+# 📚 Composr
 
-## Description
-Imposr est un outil permettant de composer un livre dans plusieurs formats (EPUB, DOCX) à partir d'un fichier source unique. Il génère automatiquement la mise en page, les frontispices, et traite correctement le formatage du texte pour différents formats de sortie.
+Bienvenue sur **Composr** ! Ce projet permet de générer facilement des fichiers PDF et EPUB à partir de documents Word (.docx) avec des options de personnalisation avancées. Idéal pour l'édition, l'auto-publication ou la création de supports professionnels.
 
-## Installation
+## 🚀 Fonctionnalités principales
 
-```bash
-npm install
+- 📄 Conversion de fichiers `.docx` en PDF et EPUB
+- 🎨 Personnalisation des styles et de la mise en page
+- 🖼️ Gestion des couvertures et des images
+- 📑 Génération automatique de la table des matières
+- 🛠️ Prise en charge de plusieurs formats de page (A4, Half-Letter, etc.)
+- 🔄 Scripts d'automatisation pour la conversion
+
+## 📂 Structure du projet
+
+```
+├── assets/                # Modèles et ressources (CSS, ejs)
+├── sources/               # Sources de documents par projet
+├── src/                   # Code source TypeScript
+├── temp/                  # Fichiers temporaires
+├── index.ts               # Point d'entrée principal
+├── package.json           # Dépendances et scripts npm
+├── README.md              # Ce fichier 😄
 ```
 
-## Utilisation
+## ⚡ Installation
 
-1. Créez un fichier de configuration en vous basant sur [`settings-sample.ts`](settings-sample.ts)
-2. Exécutez la commande:
+1. Clonez ce dépôt :
+   ```sh
+   git clone <url-du-repo>
+   cd composr
+   ```
+2. Installez les dépendances :
+   ```sh
+   npm install
+   ```
 
-```bash
-npx tsx ./index.ts -- --settings votre-fichier-settings.ts
-```
+## 🛠️ Utilisation
 
-## Configuration
+1. Placez vos fichiers `.docx` dans le dossier `sources/<votre-projet>/`.
+2. Configurez les options dans `settings.ts` du projet concerné.
+3. Lancez la génération :
+   ```sh
+   npx tsx ./index.ts --source <votre-projet> --with-pdf
+   ```
+4. Les fichiers PDF et EPUB seront générés à l'endroit indiqué dans les fichier `settings.ts` de la source.
 
-Pour configurer votre livre, créez un fichier de paramètres basé sur le modèle [`settings-sample.ts`](settings-sample.ts):
+## 📝 Exemple de configuration
 
-```typescript
-import { Settings } from './src/settings';
+Voir `settings-sample.ts` pour un exemple de configuration personnalisée.
 
-export const settings: Settings = {
-    source: 'chemin/vers/votre-fichier-source.docx',
-    output: 'chemin/vers/votre-fichier-de-sortie.docx',
-    authors: ["Prénom Nom", "Autre Auteur"],
-    title: "Titre de votre livre",
-};
-```
+## 🤝 Contribuer
 
-## Formats de page pris en charge
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
 
-- **A4**: Format standard pour l'impression en Europe
-- **Half Letter**: Format adapté aux livres de poche
+## 📄 Licence
 
-## Formats de sortie
+Ce projet est sous licence **GNU GPL v3**. Voir le fichier `COPYING` pour plus d'informations.
 
-L'outil génère automatiquement:
+---
 
-- Fichier EPUB pour les liseuses électroniques
-- Fichier DOCX au format A4 standard
-- Fichier DOCX au format Half Letter (5.5" x 8.5")
-- Fichier DOCX optimisé pour l'impression de livres de poche avec des marges adaptées
 
-## Structure du projet
+✨ Bon usage de Composr !
 
-- [`src`](src): Code source TypeScript
-- [`assets`](assets): Fichiers de style et templates
-- [`output`](output): Dossier par défaut pour les fichiers générés
-- [`sources`](sources): Dossier contenant les fichiers sources
+## 📦 Dépendances principales
 
-## Licence
-
-Ce projet est distribué sous la licence GNU GPL-3.0.
-
-## Dépendances principales
-
-- [docx](https://github.com/dolanmiu/docx) - Génération de documents Word
-- [epub-gen](https://github.com/cyrilis/epub-gen) - Génération de fichiers EPUB
-- [mammoth](https://github.com/mwilliamson/mammoth.js) - Conversion de DOCX vers HTML
-
+- [docx](https://github.com/dolanmiu/docx) – Génération de documents Word
+- [epub-gen](https://github.com/cyrilis/epub-gen) – Génération de fichiers EPUB
+- [cheerio](https://github.com/cheeriojs/cheerio) – Manipulation du HTML côté serveur
+- [mammoth](https://github.com/mwilliamson/mammoth.js) – Conversion de DOCX vers HTML
+- [yargs](https://github.com/yargs/yargs) – Parsing des arguments en ligne de commande
+- [ejs](https://github.com/mde/ejs) – Templates HTML dynamiques
