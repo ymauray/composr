@@ -129,6 +129,8 @@ async function addFrontMatter(settings: Settings, pageSettings: PageSettings, ma
 
 export async function compose(source: TagElement[], settings: Settings, pageSettings: PageSettings, marginSettings: number, pageNumbersSettings: number, outputPath: string): Promise<ISectionOptions[]> {
 
+    console.log(`Génération de ${outputPath}`);
+
     const internalSections = [] as { title: TagElement; children: TagElement[] }[];
     for (const el of source) {
         if (el.tag === 'h1') {

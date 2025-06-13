@@ -69,6 +69,8 @@ async function addFrontMatter(settings: Settings): Promise<Content[]> {
 
 export async function buildEpub(source: TagElement[], settings: Settings, outputPath: string): Promise<void> {
 
+    console.log(`Génération de ${outputPath}`);
+
     const internalSections = [] as { title: TagElement; children: TagElement[] }[];
     for (const el of source) {
         if (el.tag === 'h1') {

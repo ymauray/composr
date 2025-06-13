@@ -4,6 +4,8 @@ export async function convertToPdf(inputPath: string): Promise<string> {
 
     const outputPath = inputPath.replace(/\.docx$/, '.pdf');
 
+    console.log(`Génération de ${outputPath}`);
+
     const isWindows = process.platform === 'win32';
 
     if (isWindows)
