@@ -14,13 +14,10 @@
 // avec ce programme. Si ce n'est pas le cas, voir <https://www.gnu.org/licenses/>.
 
 import Epub, { Options } from 'epub-gen';
-import path from 'path';
 
-import { AlignmentType, convertMillimetersToTwip, Document, Footer, HeadingLevel, ISectionOptions, Packer, PageNumber, Paragraph, ParagraphChild, SectionType, TextRun } from "docx";
 import { Settings } from "./settings";
-import { PageSettings, TagElement } from "./types";
+import { TagElement } from "./types";
 import fs from "fs";
-import ejs from 'ejs';
 import { legalNotice } from './compose';
 
 type Content = { title?: string; author?: string; data: string, excludeFromToc?: boolean, beforeToc?: boolean, filename?: string };
