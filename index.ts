@@ -26,7 +26,6 @@ import { convertToPdf } from './src/pdf';
 async function main() {
     const argv = await yargs(hideBin(process.argv))
         .option('settings', {
-            alias: 's',
             type: 'string',
             description: 'Fichier de configuration',
             requiresArg: true,
