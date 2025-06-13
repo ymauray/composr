@@ -31,16 +31,30 @@ async function main() {
             description: 'Fichier de configuration',
             requiresArg: true,
         })
-        .demandOption('settings', 'Le chemin du fichier de configuration est requis.')
+        .option('source', {
+            type: 'string',
+            description: 'Source à utiliser pour la génération, le fichier de configuration sera ./sources/<source>/settings.ts',
+            requiresArg: true,
+        })
         .help()
         .argv;
 
-    if (!fs.existsSync(argv.settings)) {
+    if (!argv.settings && !argv.source) {
+        console.error("Veuillez spécifier un fichier de configuration avec --settings ou une source avec --source.");
+        process.exit(1);
+    }
+
+    if (argv.source) {
+        // Si une source est spécifiée, on construit le chemin du fichier de configuration
+        argv.settings = `./sources/${argv.source}/settings.ts`;
+    }
+
+    if (!fs.existsSync(argv.settings!)) {
         console.error(`Le fichier de configuration n'existe pas : ${argv.settings}`);
         process.exit(1);
     }
 
-    const { settings } = await import(argv.settings) as { settings: Settings };
+    const { settings } = await import(argv.settings!) as { settings: Settings };
 
     // Sanity checks
     if (!settings.source || !fs.existsSync(settings.source)) {
