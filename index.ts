@@ -91,20 +91,17 @@ async function main() {
         process.exit(1);
     }
 
-    // Paperback 
-    var outputPath = settings.output.replace('.docx', '-paperback.docx')
-    await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, outputPath);
-    argv.withPdf && await convertToPdf(outputPath);
+    let property: keyof typeof pageType;
 
-    // Regular half-letter (for PDF export)
-    outputPath = settings.output.replace('.docx', '-half-letter.docx');
-    await compose(filteredSource, settings, pageType.HALF_LETTER, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-    argv.withPdf && await convertToPdf(outputPath);
+    for (property in pageType) {
+        var outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}.docx`);
+        await compose(filteredSource, settings, pageType[property], MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
+        argv.withPdf && await convertToPdf(outputPath);
 
-    // Regular A4 (for PDF export)
-    outputPath = settings.output.replace('.docx', '-a4.docx');
-    const document = await compose(filteredSource, settings, pageType.A4, MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-    argv.withPdf && await convertToPdf(outputPath);
+        outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}-print.docx`);
+        await compose(filteredSource, settings, pageType[property], MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, outputPath);
+        argv.withPdf && await convertToPdf(outputPath);
+    }
 
     // Epub
     await buildEpub(filteredSource, settings, settings.output.replace('.docx', '.epub'));
