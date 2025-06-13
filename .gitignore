@@ -4,7 +4,7 @@
 *pdf
 *zip
 *epub
-epubcheck-5.2.1/
+dist/
 node_modules/
 output/
 sources/
