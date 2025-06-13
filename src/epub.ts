@@ -21,6 +21,7 @@ import { Settings } from "./settings";
 import { PageSettings, TagElement } from "./types";
 import fs from "fs";
 import ejs from 'ejs';
+import { legalNotice } from './compose';
 
 type Content = { title?: string; author?: string; data: string, excludeFromToc?: boolean, beforeToc?: boolean, filename?: string };
 
@@ -52,13 +53,7 @@ async function titlePage(settings: Settings): Promise<string> {
 
 async function copyrightPage(): Promise<string> {
 
-    var copyrightPageContent = "";
-
-    copyrightPageContent += "<p>Ce texte est une fiction. Les noms et les événements qui y sont décrits sont issus de l’imagination de l’auteur, et toute ressemblance avec des personnages, des personnes, ou des situations existantes ou ayant existé ne pourrait être que pure coïncidence.</p>\n";
-
-    copyrightPageContent += "<p>Les erreurs qui peuvent subsister sont le fait de l’auteur.</p>\n";
-
-    copyrightPageContent += "<p>Le piratage prive l’auteur ainsi que les personnes ayant travaillé sur ce livre de leurs droits.</p>\n";
+    var copyrightPageContent = legalNotice.map(line => `<p>${line}</p>`).join('\n');
 
     return copyrightPageContent;
 }

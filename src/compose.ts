@@ -19,7 +19,7 @@ import { PageSettings, TagElement } from "./types";
 import { MarginSettings, PageNumbersSettings } from "./page-settings";
 import fs from "fs";
 
-const legalNotice = [
+export const legalNotice = [
     "Ce livre est une œuvre de fiction. Toute ressemblance avec des personnes existantes ou ayant existé, des événements ou des lieux réels ne saurait être que fortuite.",
     "Les personnages, situations et dialogues sont issus de l’imagination de l’auteur.",
     "La copie ou le piratage de ce livre porte préjudice à l’auteur et à l’ensemble des personnes ayant contribué à sa réalisation. Merci de respecter leur travail.",
