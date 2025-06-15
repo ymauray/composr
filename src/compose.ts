@@ -222,6 +222,13 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
                         children: [
                             new TextRun(child.text),
                         ],
+                        ...(child.text == '***') && {
+                            alignment: AlignmentType.CENTER,
+                            spacing: {
+                                before: pageSettings.fontSize * 20, // in twips
+                                after: pageSettings.fontSize * 20, // in twips
+                            }
+                        },
                     }))
             ]
         };
