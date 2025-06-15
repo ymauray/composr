@@ -177,7 +177,7 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
 
     sections.push(...await addFrontMatter(settings, pageSettings, marginSettings));
 
-    var startNumbering = true;
+    let startNumbering = true;
 
     sections.push(...internalSections.map((internalSection): ISectionOptions => {
         const section = {
