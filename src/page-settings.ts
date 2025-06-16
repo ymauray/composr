@@ -38,7 +38,7 @@ const HALF_LETTER : PageSettings = {
     titleFontSize: 15, // in points
 };
 
-const POCKET_BOOK : PageSettings = {
+const SIX_BY_NINE : PageSettings = {
     size: {
         width: convertInchesToTwip(6), // 15,24 cm
         height: convertInchesToTwip(9), // 22,86 cm
@@ -77,7 +77,7 @@ const A4 : PageSettings = {
 export const pageType = {
     HALF_LETTER,
     A4,
-    POCKET_BOOK
+    SIX_BY_NINE
 };
 
 export const MarginSettings = {
