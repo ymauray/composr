@@ -23,7 +23,7 @@ export const legalNotice = [
     "Ce livre est une œuvre de fiction. Toute ressemblance avec des personnes existantes ou ayant existé, des événements ou des lieux réels ne saurait être que fortuite.",
     "Les personnages, situations et dialogues sont issus de l’imagination de l’auteur.",
     "La copie ou le piratage de ce livre porte préjudice à l’auteur et à l’ensemble des personnes ayant contribué à sa réalisation. Merci de respecter leur travail.",
-    "Toute reproduction ou diffusion, même partielle, sans autorisation, est interdite.",
+    "Tous droits de reproduction, d’adaptation et de traduction, intégrale ou partielle réservés pour tous pays. L’auteur ou l’éditeur est seul propriétaire des droits et responsable du contenu de ce livre. Le Code de la propriété intellectuelle interdit les copies ou reproductions destinées à une utilisation collective. Toute représentation ou reproduction intégrale ou partielle faite par quelque procédé que ce soit, sans le consentement de l’auteur ou de ses ayants droit ou ayants cause, est illicite et constitue une contrefaçon, aux termes des articles L.335-2 et suivants du Code de la propriété intellectuelle.",
     "L’auteur a apporté le plus grand soin à la correction du texte, mais des erreurs peuvent subsister. Toute remarque constructive est la bienvenue.",
 ];
 
