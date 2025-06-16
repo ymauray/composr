@@ -27,6 +27,16 @@ export const legalNotice = [
     "L’auteur a apporté le plus grand soin à la correction du texte, mais des erreurs peuvent subsister. Toute remarque constructive est la bienvenue.",
 ];
 
+export const aboutTheAuthor = [
+    "Originaire de Normandie, Amaury a découvert la fantaisie et le fantastique à travers les jeux de rôles. Bercé par les univers de R.A. Salvatore et Margaret Weis, il a commencé par écrire des scénarios et des récits courts qui racontaient les aventures vécues avec ses compagnons de jeu.",
+    "Au début des années 2000, son intérêt s'est tourné vers la fantaisie urbaine. Ce qui l'a séduit ? Cette alchimie fascinante entre notre réalité contemporaine et familière d'un côté, et les mystères de la magie et des créatures fantastiques de l'autre.",
+    "Il y a quelques années, Amaury a découvert le genre de la dystopie, et a été captivé par la manière dont les auteurs explorent les dérives de notre société actuelle à travers des récits sombres et intrigants.",
+    "En août 2024, son amie Sandrine Kholer lui a confié qu'elle avait entamé l'écriture d'une histoire dix ans auparavant — un projet qu'elle pensait ne jamais achever.",
+    "À cette époque, Amaury nourrissait déjà l'envie d'écrire quelque chose de plus ambitieux qu'une simple nouvelle. Le petit texte de Sandrine a fait tilt dans son esprit créatif. Il lui a alors proposé un marché : il écrirait son histoire, et en échange, ils partageraient le statut de coauteurs.",
+    "C'est ainsi qu'Amaury s'est lancé dans cette belle aventure. Il a suivi une formation à l'Institut des carrières littéraires, pendant qu'il écrivait le premier jet de son premier roman. En parallèle, il a continué à écrire des nouvelles afin d'explorer différents genres littéraires et techniques d'écriture.",
+    "",
+    "Pour suivre les aventures d'Amaury, vous pouvez vous abonner à sa newsletter sur son site web (https://amaurybennet.ch), ou le rejoindre sur instagram (@amaurybennet).",
+]
 async function titlePage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions> {
 
     const authors: ParagraphChild[] = [];
@@ -171,6 +181,47 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
     return newSection;
 }
 
+async function about(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions> {
+    const newSection: ISectionOptions = {
+        properties: {
+            type: SectionType.ODD_PAGE,
+            page: {
+                ...pageSettings,
+                ...((marginSettings == MarginSettings.NORMAL) && { margin: { ...pageSettings.margin, gutter: 0 } }),
+            },
+        },
+        children: [
+            new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: "A propos de l'auteur",
+                        }),
+                    ],
+                    heading: HeadingLevel.HEADING_1,
+                    indent: {
+                        firstLine: 0,
+                    },
+                    spacing: {
+                        after: pageSettings.fontSize * 20, // in twips
+                    }
+                }),
+            ...aboutTheAuthor.map((line) =>
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: line,
+                        }),
+                    ],
+                    indent: {
+                        firstLine: 0,
+                    },
+                })),
+        ]
+    };
+
+    return newSection;
+}
+
 async function addFrontMatter(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions[]> {
     const frontMatter: ISectionOptions[] = [
         await titlePage(settings, pageSettings, marginSettings),
@@ -178,6 +229,14 @@ async function addFrontMatter(settings: Settings, pageSettings: PageSettings, ma
     ];
 
     return frontMatter;
+}
+
+async function addBackMatter(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions[]> {
+    const backMatter: ISectionOptions[] = [
+        await about(settings, pageSettings, marginSettings),
+    ];
+
+    return backMatter;
 }
 
 export async function compose(source: TagElement[], settings: Settings, pageSettings: PageSettings, marginSettings: number, pageNumbersSettings: number, addCover: boolean, outputPath: string): Promise<ISectionOptions[]> {
@@ -294,6 +353,9 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
 
         return section;
     }));
+
+    sections.push(...await addBackMatter(settings, pageSettings, marginSettings));
+
 
     const doc = new Document({
         mirrorMargins: marginSettings === MarginSettings.OPPOSING_PAGES,
