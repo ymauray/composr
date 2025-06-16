@@ -48,17 +48,23 @@ async function titlePage(settings: Settings): Promise<string> {
     return titlePageContent;
 }
 
-async function copyrightPage(): Promise<string> {
+async function copyrightPage(settings: Settings): Promise<string> {
 
-    var copyrightPageContent = legalNotice.map(line => `<p>${line}</p>`).join('\n');
-
+    const copyrightPageContent = [
+        ...legalNotice.map(line => `<p>${line}</p>`),
+        `<p class="publisher">${settings.publisher}</p>`,
+        `<p class="publisher-address">${settings.publisherAddress}</p>`,
+        `<p class="copyright">${settings.copyright}</p>`,
+        ...(settings.isbn ? [`<p class="isbn">ISBN: ${settings.isbn!}</p>`] : [])
+    ].join('\n');
+    
     return copyrightPageContent;
 }
 
 async function addFrontMatter(settings: Settings): Promise<Content[]> {
     const frontMatter: Content[] = [
         { title: 'Frontispice', data: await titlePage(settings), beforeToc: true },
-        { title: 'Mentions légales', data: await copyrightPage(), beforeToc: true },
+        { title: 'Mentions légales', data: await copyrightPage(settings), beforeToc: true },
     ];
 
     return frontMatter;

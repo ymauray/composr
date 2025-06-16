@@ -102,17 +102,70 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
                 ...((marginSettings == MarginSettings.NORMAL) && { margin: { ...pageSettings.margin, gutter: 0 } }),
             },
         },
-        children: legalNotice.map((line) =>
+        children: [
+            ...legalNotice.map((line) =>
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: line,
+                        }),
+                    ],
+                    indent: {
+                        firstLine: 0,
+                    },
+                    spacing: {
+                        after: pageSettings.fontSize * 20, // in twips
+                    }
+                })),
             new Paragraph({
                 children: [
                     new TextRun({
-                        text: line,
+                        text: settings.publisher,
                     }),
                 ],
+                indent: {
+                    firstLine: 0,
+                },
                 spacing: {
-                    after: pageSettings.fontSize * 20, // in twips
+                    before: (pageSettings.fontSize * 5) * 20, // in twips
                 }
-            }))
+            }),
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: settings.publisherAddress,
+                    }),
+                ],
+                indent: {
+                    firstLine: 0,
+                },
+            }),
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: settings.copyright,
+                    }),
+                ],
+                indent: {
+                    firstLine: 0,
+                },
+            }),
+            ...(settings.isbn ? [
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: `ISBN: ${settings.isbn!}`,
+                        }),
+                    ],
+                    indent: {
+                        firstLine: 0,
+                    },
+                    spacing: {
+                        before: pageSettings.fontSize * 20, // in twips
+                    }
+                })
+            ] : []),
+        ]
     };
 
     return newSection;

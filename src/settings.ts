@@ -20,6 +20,9 @@ export class Settings {
     title: string = ''; // Title of the document, e.g., 'My awesome book'
     authors: string[] = []; // List of authors, e.g., ['Alice Smith', 'Bob Johnson', 'Charlie Brown']
     publisher: string = ''; // Publisher name, e.g., 'My Publisher Name'
+    publisherAddress: string = ''; // Publisher address or email, e.g., 'selfpublishing@mydomain.com'
+    copyright: string = ''; // Copyright notice, e.g., '© 2025 Alice Smith, Bob Johnson, Charlie Brown'
+    isbn?: string = ''; // ISBN number, if applicable, e.g., '978-3-16-148410-0'
     lang: string = ''; // Language of the document, e.g., 'fr' for French, 'en' for English
     tocTitle: string = ''; // Title for the table of contents, e.g., 'Table des matières' in French, 'Table of Contents' in English
 }
