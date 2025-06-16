@@ -18,7 +18,7 @@ import Epub, { Options } from 'epub-gen';
 import { Settings } from "./settings";
 import { TagElement } from "./types";
 import fs from "fs";
-import { legalNotice } from './compose';
+import { legalNotice, aboutTheAuthor } from './compose';
 
 type Content = { title?: string; author?: string; data: string, excludeFromToc?: boolean, beforeToc?: boolean, filename?: string };
 
@@ -60,6 +60,16 @@ async function copyrightPage(settings: Settings): Promise<string> {
     return copyrightPageContent;
 }
 
+async function about(settings: Settings): Promise<string> {
+    const aboutContent = [
+        `<h1>A propos de l'auteur</h1>`,
+        ...aboutTheAuthor.map(line => `<p>${line === '' ? '&nbsp;' : line}</p>`),
+    ].join('\n');
+
+    return aboutContent;
+}
+
+
 async function addFrontMatter(settings: Settings): Promise<Content[]> {
     const frontMatter: Content[] = [
         { title: 'Frontispice', data: await titlePage(settings), beforeToc: true },
@@ -68,6 +78,16 @@ async function addFrontMatter(settings: Settings): Promise<Content[]> {
 
     return frontMatter;
 }
+
+async function addBackMatter(settings: Settings): Promise<Content[]> {
+    const backMatter: Content[] = [
+        { title: "A propos de l'auteur", data: await about(settings), beforeToc: false },
+    ];
+
+    return backMatter;
+}
+
+
 
 export async function buildEpub(source: TagElement[], settings: Settings, outputPath: string): Promise<void> {
 
@@ -93,6 +113,8 @@ export async function buildEpub(source: TagElement[], settings: Settings, output
             data: `<h1>${internalSection.title.text}</h1>\n${internalSection.children.map(child => `<p${child.text === "***" ? ' class="elipsis"':''}>${child.text}</p>`).join('\n')}`
         };
     }));
+
+    content.push(...await addBackMatter(settings));
 
     const options = {
         title: settings.title,
