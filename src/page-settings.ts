@@ -38,6 +38,24 @@ const HALF_LETTER : PageSettings = {
     titleFontSize: 15, // in points
 };
 
+const POCKET_BOOK : PageSettings = {
+    size: {
+        width: convertInchesToTwip(6), // 15,24 cm
+        height: convertInchesToTwip(9), // 22,86 cm
+    },
+    margin: {
+        left: convertMillimetersToTwip(16), // 1.6 cm
+        right: convertMillimetersToTwip(16), // 1.6 cm
+        top: convertMillimetersToTwip(19), // 1.9 cm
+        bottom: convertMillimetersToTwip(24), // 1.9 cm
+        gutter: convertMillimetersToTwip(3), // 0.3 cm
+    },
+    fontName: "Amazon Endure Book",
+    fontSize: 10, // in points
+    titleFontName: "Arial",
+    titleFontSize: 15, // in points
+};
+
 const A4 : PageSettings = {
     size: {
         width: convertMillimetersToTwip(210), // 21.0 cm
@@ -59,6 +77,7 @@ const A4 : PageSettings = {
 export const pageType = {
     HALF_LETTER,
     A4,
+    POCKET_BOOK
 };
 
 export const MarginSettings = {
