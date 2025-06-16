@@ -35,7 +35,7 @@ export const aboutTheAuthor = [
     "À cette époque, Amaury nourrissait déjà l'envie d'écrire quelque chose de plus ambitieux qu'une simple nouvelle. Le petit texte de Sandrine a fait tilt dans son esprit créatif. Il lui a alors proposé un marché : il écrirait son histoire, et en échange, ils partageraient le statut de coauteurs.",
     "C'est ainsi qu'Amaury s'est lancé dans cette belle aventure. Il a suivi une formation à l'Institut des carrières littéraires, pendant qu'il écrivait le premier jet de son premier roman. En parallèle, il a continué à écrire des nouvelles afin d'explorer différents genres littéraires et techniques d'écriture.",
     "",
-    "Pour suivre les aventures d'Amaury, vous pouvez vous abonner à sa newsletter sur son site web (https://amaurybennet.ch), ou le rejoindre sur instagram (@amaurybennet).",
+    "Pour suivre les aventures d'Amaury, vous pouvez vous abonner à sa newsletter sur son site web (https://amaurybennet.ch), le rejoindre sur Instagram (@amaurybennet), ou le suivre sur Twitch (@amaurybennet) pour de sessions de coworking.",
 ]
 async function titlePage(settings: Settings, pageSettings: PageSettings, marginSettings: number): Promise<ISectionOptions> {
 
@@ -356,6 +356,54 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
 
     sections.push(...await addBackMatter(settings, pageSettings, marginSettings));
 
+    // If there is a "dedication.txt" file next to the source file, read it line by line and add it as a section
+    const dedicationPath = `${settings.source.replace('.docx', '.txt')}`;
+    if (fs.existsSync(dedicationPath)) {
+        const dedicationContent = fs.readFileSync(dedicationPath, 'utf-8');
+        const dedicationLines = dedicationContent.split('\n').map(line => line.trim());
+
+        if (dedicationLines.length > 0) {
+            sections.push({
+                properties: {
+                    type: SectionType.ODD_PAGE,
+                    page: {
+                        ...pageSettings,
+                        ...((marginSettings == MarginSettings.NORMAL) && { margin: { ...pageSettings.margin, gutter: 0 } }),
+                    },
+                },
+                children: [
+                    new Paragraph({
+                        children: [
+                            new TextRun({
+                                text: "Remerciements",
+                            }),
+                        ],
+                        heading: HeadingLevel.HEADING_1,
+                        indent: {
+                            firstLine: 0,
+                        },
+                        spacing: {
+                            after: pageSettings.fontSize * 20, // in twips
+                        }
+                    }),
+                    ...dedicationLines.map(line =>
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: line,
+                                }),
+                            ],
+                            indent: {
+                                firstLine: 0,
+                            },
+                            spacing: {
+                                after: pageSettings.fontSize * 20, // in twips
+                            }
+                        }))
+                ]
+            });
+        }
+    }
 
     const doc = new Document({
         mirrorMargins: marginSettings === MarginSettings.OPPOSING_PAGES,

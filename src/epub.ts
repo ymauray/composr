@@ -116,6 +116,20 @@ export async function buildEpub(source: TagElement[], settings: Settings, output
 
     content.push(...await addBackMatter(settings));
 
+    // If there is a "dedication.txt" file next to the source file, read it line by line and add it as a section
+    const dedicationPath = `${settings.source.replace('.docx', '.txt')}`;
+    if (fs.existsSync(dedicationPath)) {
+        const dedicationContent = fs.readFileSync(dedicationPath, 'utf-8');
+        const dedicationLines = dedicationContent.split('\n').map(line => line.trim());
+
+        if (dedicationLines.length > 0) {
+            content.push({
+                title: 'Remerciements',
+                data: `<h1>Remerciements</h1>\n${dedicationLines.map(line => `<p class="dedication">${line}</p>`).join('\n')}`,
+            })
+        };
+    }
+
     const options = {
         title: settings.title,
         author: settings.authors,
