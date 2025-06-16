@@ -55,7 +55,6 @@ async function copyrightPage(settings: Settings): Promise<string> {
         `<p class="publisher">${settings.publisher}</p>`,
         `<p class="publisher-address">${settings.publisherAddress}</p>`,
         `<p class="copyright">${settings.copyright}</p>`,
-        ...(settings.isbn ? [`<p class="isbn">ISBN: ${settings.isbn!}</p>`] : [])
     ].join('\n');
     
     return copyrightPageContent;

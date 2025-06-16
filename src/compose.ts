@@ -127,7 +127,7 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
                     firstLine: 0,
                 },
                 spacing: {
-                    before: (pageSettings.fontSize * 5) * 20, // in twips
+                    before: (pageSettings.fontSize * 3) * 20, // in twips
                 }
             }),
             new Paragraph({
@@ -280,6 +280,9 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
                             spacing: {
                                 before: pageSettings.fontSize * 20, // in twips
                                 after: pageSettings.fontSize * 20, // in twips
+                            },
+                            indent: {
+                                firstLine: 0,
                             }
                         },
                     }))

@@ -47,7 +47,7 @@ const HALF_LETTER : PageSettings = {
         left: convertMillimetersToTwip(16), // 1.6 cm
         right: convertMillimetersToTwip(16), // 1.6 cm
         top: convertMillimetersToTwip(19), // 1.9 cm
-        bottom: convertMillimetersToTwip(24), // 1.9 cm
+        bottom: convertMillimetersToTwip(24), // 2.4 cm
         gutter: convertMillimetersToTwip(3), // 0.3 cm
     },
     fontName: "Amazon Endure Book",
@@ -65,7 +65,7 @@ const SIX_BY_NINE : PageSettings = {
         left: convertMillimetersToTwip(16), // 1.6 cm
         right: convertMillimetersToTwip(16), // 1.6 cm
         top: convertMillimetersToTwip(19), // 1.9 cm
-        bottom: convertMillimetersToTwip(24), // 1.9 cm
+        bottom: convertMillimetersToTwip(24), // 2.4 cm
         gutter: convertMillimetersToTwip(3), // 0.3 cm
     },
     fontName: "Amazon Endure Book",
