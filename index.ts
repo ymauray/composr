@@ -94,7 +94,7 @@ async function main() {
     let property: keyof typeof pageType;
 
     for (property in pageType) {
-        var outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}.docx`);
+        let outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}.docx`);
         await compose(filteredSource, settings, pageType[property], MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
         argv.withPdf && await convertToPdf(outputPath);
 

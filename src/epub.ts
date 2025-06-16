@@ -24,7 +24,7 @@ type Content = { title?: string; author?: string; data: string, excludeFromToc?:
 
 async function titlePage(settings: Settings): Promise<string> {
 
-    var titlePageContent = "<div class='authors'>\n";
+    let titlePageContent = "<div class='authors'>\n";
 
     // Add authors
     settings.authors.forEach((author, index) => {
@@ -33,7 +33,7 @@ async function titlePage(settings: Settings): Promise<string> {
             titlePageContent += "<div class='and'>et</div>\n";
         }
 
-        var authorText = `<div class='author'>${author}`;
+        let authorText = `<div class='author'>${author}`;
 
         // Add a comma after the author if there are 3 or more, and it's not the last one
         if (index < settings.authors.length - 2) {
