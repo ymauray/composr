@@ -20,6 +20,24 @@ import {
     convertMillimetersToTwip,
 } from "docx";
 
+const POCKET_BOOK : PageSettings = {
+    size: {
+        width: convertMillimetersToTwip(106), // 10.6 cm
+        height: convertMillimetersToTwip(174), // 17.4 cm
+    },
+    margin: {
+        left: convertMillimetersToTwip(8), // 0.8 cm
+        right: convertMillimetersToTwip(8), // 0.8 cm
+        top: convertMillimetersToTwip(15), // 1.5 cm
+        bottom: convertMillimetersToTwip(20), // 2.0 cm
+        gutter: convertMillimetersToTwip(5), // 0.5 cm
+    },
+    fontName: "Amazon Endure Book",
+    fontSize: 10, // in points
+    titleFontName: "Arial",
+    titleFontSize: 15, // in points
+};
+
 const HALF_LETTER : PageSettings = {
     size: {
         width: convertInchesToTwip(5.5), // 13.97 cm
@@ -75,6 +93,7 @@ const A4 : PageSettings = {
 };
 
 export const pageType = {
+    POCKET_BOOK,
     HALF_LETTER,
     A4,
     SIX_BY_NINE
