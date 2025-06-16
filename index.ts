@@ -96,11 +96,13 @@ async function main() {
     for (property in pageType) {
         let outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}.docx`);
         await compose(filteredSource, settings, pageType[property], MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, outputPath);
-        argv.withPdf && await convertToPdf(outputPath);
+        if (argv.withPdf)
+            await convertToPdf(outputPath);
 
         outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}-print.docx`);
         await compose(filteredSource, settings, pageType[property], MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, outputPath);
-        argv.withPdf && await convertToPdf(outputPath);
+        if (argv.withPdf)
+            await convertToPdf(outputPath);
     }
 
     // Epub
