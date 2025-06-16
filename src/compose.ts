@@ -120,7 +120,7 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
             new Paragraph({
                 children: [
                     new TextRun({
-                        text: settings.publisher,
+                        text: 'Autoédition Amaury Bennett',
                     }),
                 ],
                 indent: {
@@ -133,7 +133,7 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
             new Paragraph({
                 children: [
                     new TextRun({
-                        text: settings.publisherAddress,
+                        text: 'autoedition@amaurybennett.ch',
                     }),
                 ],
                 indent: {
@@ -143,7 +143,7 @@ async function copyrightPage(settings: Settings, pageSettings: PageSettings, mar
             new Paragraph({
                 children: [
                     new TextRun({
-                        text: settings.copyright,
+                        text: `© ${settings.copyright} Amaury Bennett`,
                     }),
                 ],
                 indent: {

@@ -21,10 +21,6 @@ export const settings: Settings = {
     output: 'output.docx',
     title: "My Book Title",
     authors: ["Alice Smith", "Bob Johnson", "Charlie Brown"],
-    publisher: 'My Publisher Name',
-    publisherAddress: 'selfpublishing@mydomain.com',
-    copyright: '© 2025 Alice Smith, Bob Johnson, Charlie Brown',
+    copyright: 2023,
     isbn: '978-3-16-148410-0',
-    lang: 'en',
-    tocTitle: 'Table of Contents'
 };

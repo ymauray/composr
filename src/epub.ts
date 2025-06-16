@@ -52,9 +52,9 @@ async function copyrightPage(settings: Settings): Promise<string> {
 
     const copyrightPageContent = [
         ...legalNotice.map(line => `<p>${line}</p>`),
-        `<p class="publisher">${settings.publisher}</p>`,
-        `<p class="publisher-address">${settings.publisherAddress}</p>`,
-        `<p class="copyright">${settings.copyright}</p>`,
+        `<p class="publisher">Autoédition Amaury Bennett</p>`,
+        `<p class="publisher-address">autoedition@amaurybennett.ch</p>`,
+        `<p class="copyright">© ${settings.copyright} Amaury Bennett</p>`,
     ].join('\n');
     
     return copyrightPageContent;
@@ -97,9 +97,9 @@ export async function buildEpub(source: TagElement[], settings: Settings, output
     const options = {
         title: settings.title,
         author: settings.authors,
-        publisher: settings.publisher,
-        lang: settings.lang,
-        tocTitle: settings.tocTitle,
+        publisher: 'Autoédition Amaury Bennett',
+        lang: 'fr',
+        tocTitle: 'Table de matières',
         customNcxTocTemplatePath: 'assets/toc.ncx.ejs',
         customHtmlTocTemplatePath: 'assets/toc.xhtml.ejs',
         customOpfTemplatePath: 'assets/content.opf.ejs',
