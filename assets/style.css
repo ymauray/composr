@@ -47,3 +47,9 @@ ul li a {
 .isbn {
     margin-top: 1em;
 }
+
+.elipsis {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

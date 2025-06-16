@@ -91,7 +91,7 @@ export async function buildEpub(source: TagElement[], settings: Settings, output
     content.push(...internalSections.map(internalSection => {
         return {
             title: internalSection.title.text,
-            data: `<h1>${internalSection.title.text}</h1>\n${internalSection.children.map(child => `<p>${child.text}</p>`).join('\n')}`
+            data: `<h1>${internalSection.title.text}</h1>\n${internalSection.children.map(child => `<p${child.text === "***" ? ' class="elipsis"':''}>${child.text}</p>`).join('\n')}`
         };
     }));
 
