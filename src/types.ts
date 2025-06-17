@@ -30,6 +30,7 @@ export class Section {
 export class PageSettings {
     size: { width: number; height: number } = { width: 0, height: 0 }; // Page size in points
     margin: { left: number; right: number; top: number; bottom: number; gutter?: number } = { left: 0, right: 0, top: 0, bottom: 0 };
+    indentFirstLine: number = 0; // Indentation for the first line of each paragraph in points
     fontName: string = '';
     fontSize: number = 0; // in points
     titleFontName: string = ''; // Font for the title

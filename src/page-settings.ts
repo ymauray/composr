@@ -32,6 +32,8 @@ const POCKET_BOOK : PageSettings = {
         bottom: convertMillimetersToTwip(20), // 2.0 cm
         gutter: convertMillimetersToTwip(5), // 0.5 cm
     },
+    indentFirstLine: convertMillimetersToTwip(5), // 0.5 cm
+    // Indentation for the first line of each paragraph
     fontName: "Amazon Endure Book",
     fontSize: 10, // in points
     titleFontName: "Arial",
@@ -50,6 +52,7 @@ const HALF_LETTER : PageSettings = {
         bottom: convertMillimetersToTwip(24), // 2.4 cm
         gutter: convertMillimetersToTwip(3), // 0.3 cm
     },
+    indentFirstLine: convertMillimetersToTwip(10), // 1 cm
     fontName: "Amazon Endure Book",
     fontSize: 10, // in points
     titleFontName: "Arial",
@@ -68,6 +71,7 @@ const SIX_BY_NINE : PageSettings = {
         bottom: convertMillimetersToTwip(24), // 2.4 cm
         gutter: convertMillimetersToTwip(3), // 0.3 cm
     },
+    indentFirstLine: convertMillimetersToTwip(10), // 1 cm
     fontName: "Amazon Endure Book",
     fontSize: 10, // in points
     titleFontName: "Arial",
@@ -86,6 +90,7 @@ const A4 : PageSettings = {
         bottom: convertMillimetersToTwip(26), // 2.6 cm
         gutter: convertMillimetersToTwip(4.5), // 0.45 cm
     },
+    indentFirstLine: convertMillimetersToTwip(10), // 1 cm
     fontName: "Bookerly",
     fontSize: 12, // in points
     titleFontName: "Montserrat",

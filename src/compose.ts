@@ -438,7 +438,7 @@ export async function compose(source: TagElement[], settings: Settings, pageSett
                             before: 0, // in twips
                         },
                         indent: {
-                            firstLine: convertMillimetersToTwip(10),
+                            firstLine: pageSettings.indentFirstLine,
                             left: 0,
                             right: 0,
                         },
