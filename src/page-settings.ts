@@ -21,6 +21,7 @@ import {
 } from "docx";
 
 const POCKET_BOOK : PageSettings = {
+    name: 'Pocket Book',
     size: {
         width: convertMillimetersToTwip(106), // 10.6 cm
         height: convertMillimetersToTwip(174), // 17.4 cm
@@ -41,6 +42,7 @@ const POCKET_BOOK : PageSettings = {
 };
 
 const HALF_LETTER : PageSettings = {
+    name: 'Half Letter',
     size: {
         width: convertInchesToTwip(5.5), // 13.97 cm
         height: convertInchesToTwip(8.5), // 21.59 cm
@@ -60,6 +62,7 @@ const HALF_LETTER : PageSettings = {
 };
 
 const SIX_BY_NINE : PageSettings = {
+    name: 'Six by Nine',
     size: {
         width: convertInchesToTwip(6), // 15,24 cm
         height: convertInchesToTwip(9), // 22,86 cm
@@ -79,6 +82,7 @@ const SIX_BY_NINE : PageSettings = {
 };
 
 const A4 : PageSettings = {
+    name: 'A4',
     size: {
         width: convertMillimetersToTwip(210), // 21.0 cm
         height: convertMillimetersToTwip(297), // 29.7 cm

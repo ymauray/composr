@@ -22,6 +22,7 @@ import { MarginSettings, PageNumbersSettings, pageType } from './src/page-settin
 import { compose } from './src/compose';
 import { buildEpub } from './src/epub';
 import { convertToPdf } from './src/pdf';
+import { CoverSettings, PdfSettings } from './src/types';
 
 async function main() {
     const argv = await yargs(hideBin(process.argv))
@@ -91,27 +92,10 @@ async function main() {
         process.exit(1);
     }
 
-    let property: keyof typeof pageType;
-
-    for (property in pageType) {
-        let outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}.docx`);
-        await compose(filteredSource, settings, pageType[property], MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, true, outputPath);
-        if (argv.withPdf)
-            await convertToPdf(outputPath);
-
-        outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}-no-cover.docx`);
-        await compose(filteredSource, settings, pageType[property], MarginSettings.NORMAL, PageNumbersSettings.BOTTOM, false, outputPath);
-        if (argv.withPdf)
-            await convertToPdf(outputPath);
-
-        outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}-print.docx`);
-        await compose(filteredSource, settings, pageType[property], MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, true, outputPath);
-        if (argv.withPdf)
-            await convertToPdf(outputPath);
-
-        outputPath = settings.output.replace('.docx', `-${property.toLowerCase().replace('_', '-')}-print-no-cover.docx`);
-        await compose(filteredSource, settings, pageType[property], MarginSettings.OPPOSING_PAGES, PageNumbersSettings.BOTTOM, false, outputPath);
-        if (argv.withPdf)
+    for (let outputFormat of settings.outputFormats) {
+        let outputPath = settings.output.replace('.docx', `-${outputFormat.pageSettings.name.toLowerCase().replace('_', '-')}.docx`);
+        await compose(filteredSource, settings, outputFormat.pageSettings, outputFormat.marginSettings, PageNumbersSettings.BOTTOM, outputFormat.coverSettings, outputPath);
+        if (outputFormat.pdfSetting == PdfSettings.WITH_PDF)
             await convertToPdf(outputPath);
     }
 

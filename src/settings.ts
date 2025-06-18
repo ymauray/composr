@@ -13,10 +13,20 @@
 // Vous devriez avoir reçu une copie de la Licence Publique Générale GNU
 // avec ce programme. Si ce n'est pas le cas, voir <https://www.gnu.org/licenses/>.
 
+import { PageSettings } from "./types";
+
+export interface OutputFormat {
+    pageSettings: PageSettings,
+    marginSettings: number,
+    coverSettings: boolean,
+    pdfSetting: boolean,
+}
+
 export class Settings {
     source: string = ''; // Source file path, e.g., 'sources/mybook/My Book.docx'
     cover: string = ''; // Cover image path, e.g., 'sources/mybook/cover.jpg'
     output: string = ''; // Output file path, e.g., 'output/mybook.docx'
+    outputFormats: OutputFormat[] = []; // List of output formats with their page settings
     title: string = ''; // Title of the document, e.g., 'My awesome book'
     authors: string[] = []; // List of authors, e.g., ['Alice Smith', 'Bob Johnson', 'Charlie Brown']
     copyright: number = 2025; // Copyright year
