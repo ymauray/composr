@@ -3,6 +3,7 @@
 [![CI](https://github.com/ymauray/composr/actions/workflows/ci.yml/badge.svg)](https://github.com/ymauray/composr/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/ymauray/composr)](https://github.com/ymauray/composr/releases/latest)
 [![Licence : GPL v3](https://img.shields.io/github/license/ymauray/composr)](COPYING)
+[![repocheck](https://img.shields.io/badge/repocheck%201.3.0-100%2F100-brightgreen)](https://github.com/ymauray/repocheck)
 
 Bienvenue sur **Composr** ! Ce projet permet de générer facilement des fichiers PDF et EPUB à partir de documents Word (.docx) avec des options de personnalisation avancées. Idéal pour l'édition, l'auto-publication ou la création de supports professionnels.
 
