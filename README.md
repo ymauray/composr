@@ -31,7 +31,7 @@ Bienvenue sur **Composr** ! Ce projet permet de générer facilement des fichier
 
 1. Clonez ce dépôt :
    ```sh
-   git clone <url-du-repo>
+   git clone https://github.com/ymauray/composr.git
    cd composr
    ```
 2. Installez les dépendances :
@@ -53,9 +53,19 @@ Bienvenue sur **Composr** ! Ce projet permet de générer facilement des fichier
 
 Voir `settings-sample.ts` pour un exemple de configuration personnalisée.
 
+## ⚙️ Intégration continue et releases
+
+Tout passe par GitHub Actions, sans outil externe :
+
+- **CI** (`.github/workflows/ci.yml`) : à chaque push et pull request vers `main`, installe les dépendances (`npm ci`) et vérifie les types (`npm run typecheck`). Il n'y a pas encore de tests automatisés, et la conversion PDF (qui exige Microsoft Word) n'est pas testée en CI.
+- **Release** (`.github/workflows/release.yml`) : à chaque push sur `main`, crée le tag `v<version>` et la release GitHub correspondant au champ `version` de `package.json`, s'ils n'existent pas encore. Publier une version revient donc à incrémenter `version`.
+- **Dependabot** : mises à jour hebdomadaires des dépendances npm et des actions GitHub.
+
+Aucun paquet n'est publié sur npm : la release GitHub ne contient que le code source.
+
 ## 🤝 Contribuer
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
+Les contributions sont les bienvenues ! Consultez [`CONTRIBUTING.md`](CONTRIBUTING.md) avant d'ouvrir une issue ou une pull request.
 
 ## 📄 Licence
 
