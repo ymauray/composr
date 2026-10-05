@@ -1,0 +1,48 @@
+name: Rapport de bug
+description: Signaler un dysfonctionnement de la génération DOCX, PDF ou EPUB
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Merci de vérifier qu'un rapport similaire n'est pas déjà ouvert.
+  - type: input
+    id: version
+    attributes:
+      label: Version de Composr
+      description: Release utilisée, ou commit de `main`.
+    validations:
+      required: true
+  - type: input
+    id: environnement
+    attributes:
+      label: Environnement
+      description: Système d'exploitation, version de Node.js, version de Word si la conversion PDF est en cause.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description du problème
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Étapes de reproduction
+      description: Commande lancée et extrait pertinent de `settings.ts`.
+      placeholder: |
+        1. npx tsx ./index.ts --source monlivre --with-pdf
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Comportement attendu
+    validations:
+      required: true
+  - type: textarea
+    id: contexte
+    attributes:
+      label: Informations complémentaires
+      description: Messages d'erreur, captures du document produit.

@@ -15,15 +15,15 @@
 
 import { MarginSettings, pageType } from './src/page-settings';
 import { Settings } from './src/settings';
-import { CoverSettings } from './src/types';
+import { CoverSettings, PdfSettings } from './src/types';
 
 export const settings: Settings = {
     source: 'sources/mybook/My Book.docx',
     cover: 'sources/mybook/cover.jpg',
     output: 'output.docx',
     outputFormats: [
-        { pageSettings: pageType.A4, marginSettings: MarginSettings.NORMAL, coverSettings: CoverSettings.WITH_COVER },
-        { pageSettings: pageType.POCKET_BOOK, marginSettings: MarginSettings.OPPOSING_PAGES, coverSettings: CoverSettings.NO_COVER },
+        { pageSettings: pageType.A4, marginSettings: MarginSettings.NORMAL, coverSettings: CoverSettings.WITH_COVER, pdfSetting: PdfSettings.WITH_PDF },
+        { pageSettings: pageType.POCKET_BOOK, marginSettings: MarginSettings.OPPOSING_PAGES, coverSettings: CoverSettings.NO_COVER, pdfSetting: PdfSettings.NO_PDF },
     ],
     title: "My Book Title",
     authors: ["Alice Smith", "Bob Johnson", "Charlie Brown"],
